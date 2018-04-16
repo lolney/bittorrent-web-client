@@ -23,12 +23,18 @@
     "less": "^2.5.0",
     "less-loader": "^2.2.0",
     "node-libs-browser": "^1.0.0",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "react-hot-loader": "^1.2.7",
     "react-router": "^2.3.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.9.6",
     "webpack-dev-server": "^1.8.2"
+  },
+  "dependencies": {
+    "react-redux": "^5.0.7",
+    "react-redux-form": "^1.16.8",
+    "react-table": "^6.8.0",
+    "redux": "^3.7.2"
   }
 }
