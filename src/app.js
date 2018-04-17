@@ -1,16 +1,12 @@
 import React from 'react';
 
 // Components
-import Nav from './components/nav.js';
+import Torrents from './containers/torrents.js';
 
 const App = React.createClass({
   render() {
     return (
-      <div>
-        <Nav />
-
-        {this.props.children}
-      </div>
+      <Torrents />
     );
   }
 });

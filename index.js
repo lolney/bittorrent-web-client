@@ -1,21 +1,26 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {Router, Route, hashHistory} from 'react-router';
+import { render } from 'react-dom';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import App from './src/app'
+import reducer from './src/reducers'
+
+const store = createStore(reducer, {
+  torrents: [{
+    name: 'Example',
+    status: 'Running',
+    up: 120,
+    down: 60,
+    npeers: 30,
+  }]
+})
 
 // Global Styles
 import './assets/styles/bootstrap.css'
 import './assets/styles/index.less'
 
-// Components
-import Page1 from './src/components/page1.js';
-import Page2 from './src/components/page2.js';
-
 render((
-  <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <Route path="/page1" component={Page1}/>
-      <Route path="/page2" component={Page2}/>
-    </Route>
-  </Router>
+  <Provider store={store}>
+    <App />
+  </Provider>
 ), document.getElementById('app'));
