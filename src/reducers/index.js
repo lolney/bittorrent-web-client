@@ -5,6 +5,12 @@ const reducers = function (state = {}, action) {
                 ...state,
                 torrents: state.torrents.concat(action.torrent)
             }
+        case "RECEIVE_TORRENTS":
+            console.log(action.torrents)
+            return {
+                ...state,
+                torrents: action.torrents
+            }
         default:
             return state
     }

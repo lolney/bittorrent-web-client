@@ -32,9 +32,11 @@
     "webpack-dev-server": "^1.8.2"
   },
   "dependencies": {
+    "cross-fetch": "^2.1.1",
     "react-redux": "^5.0.7",
     "react-redux-form": "^1.16.8",
     "react-table": "^6.8.0",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   }
 }

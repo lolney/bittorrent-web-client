@@ -1,7 +1,8 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { createStore } from 'redux'
+import React from 'react'
+import { render } from 'react-dom'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
 import App from './src/app'
 import reducer from './src/reducers'
 
@@ -13,7 +14,11 @@ const store = createStore(reducer, {
     down: 60,
     npeers: 30,
   }]
-})
+},
+  applyMiddleware(
+    thunkMiddleware
+  )
+)
 
 // Global Styles
 import './assets/styles/bootstrap.css'
