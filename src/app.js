@@ -4,11 +4,9 @@ import React from 'react';
 import Torrents from './containers/torrents.js';
 
 const App = React.createClass({
-  render() {
-    return (
-      <Torrents />
-    );
-  }
+    render() {
+        return <Torrents />;
+    }
 });
 
 export default App;

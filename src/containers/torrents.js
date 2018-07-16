@@ -1,12 +1,11 @@
-import { connect } from 'react-redux'
-import Table from '../components/table.js'
-
+import { connect } from 'react-redux';
+import Table from '../components/table.js';
 
 const mapStateToProps = (state, ownProps) => {
     return {
         data: state.torrents
-    }
-}
+    };
+};
 /*
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
@@ -19,6 +18,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const Torrents = connect(
     mapStateToProps,
     null
-)(Table)
+)(Table);
 
 export default Torrents;
