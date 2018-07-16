@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import TableContainer from './containers/tableContainer';
+import FooterContainer from './containers/footerContainer';
 
-// Components
-import Torrents from './containers/torrents.js';
-
-const App = React.createClass({
+export default class App extends Component {
     render() {
-        return <Torrents />;
+        return (
+            <div>
+                <TableContainer />
+                <FooterContainer />
+            </div>
+        );
     }
-});
-
-export default App;
+}

@@ -1,21 +1,11 @@
 const reducers = function(state = {}, action) {
     switch (action.type) {
     case 'ADD_TORRENT':
+        let torrents = { ...state.torrents };
+        torrents[action.torrent.info_hash] = action.torrent;
         return {
             ...state,
-            torrents: state.torrents.concat(action.torrent)
-        };
-    case 'REMOVE_TORRENT':
-        return {
-            ...state
-        };
-    case 'PAUSE_TORRENT':
-        return {
-            ...state
-        };
-    case 'START_TORRENT':
-        return {
-            ...state
+            torrents: torrents
         };
     case 'RECEIVE_TORRENTS':
         console.log(action.torrents);

@@ -1,23 +1,25 @@
 import { connect } from 'react-redux';
 import Table from '../components/table.js';
 
+import { fetchTorrents } from '../actions';
+
 const mapStateToProps = (state, ownProps) => {
     return {
         data: state.torrents
     };
 };
-/*
+
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onClick: () => {
-            dispatch(setVisibilityFilter(ownProps.filter))
+        refresh: () => {
+            dispatch(fetchTorrents());
         }
-    }
-}*/
+    };
+};
 
-const Torrents = connect(
+const TableContainer = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(Table);
 
-export default Torrents;
+export default TableContainer;

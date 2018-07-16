@@ -14,6 +14,28 @@ export const receiveTorrents = (torrents) => ({
     torrents
 });
 
+let requestUpdate = (action, id) =>
+    function(dispatch) {
+        dispatch(requestTorrents());
+
+        return fetch(`http://localhost:8000/torrent/${id}/${action}`)
+            .then((response) => response.json())
+            .then((torrent) => dispatch(addTorrent(torrent)))
+            .catch((error) => console.log('An error occurred.', error));
+    };
+
+export function startTorrent(id) {
+    return requestUpdate('start', id);
+}
+
+export function removeTorrent(id) {
+    return requestUpdate('remove', id);
+}
+
+export function pauseTorrent(id) {
+    return requestUpdate('pause', id);
+}
+
 export function fetchTorrents() {
     // Thunk middleware knows how to handle functions.
     // It passes the dispatch method as an argument to the function,
@@ -43,7 +65,6 @@ export function fetchTorrents() {
             .then((json) =>
                 // We can dispatch many times!
                 // Here, we update the app state with the results of the API call.
-
                 dispatch(receiveTorrents(json.torrents))
             );
     };
