@@ -1,15 +1,15 @@
 {
-  "name": "webpack-react-quickstart",
+  "name": "rust-bittorrent-webclient",
   "version": "1.0.0",
-  "description": "For simple projects using Webpack, React, React-Router, ES6 & Bootstrap",
+  "description": "A webclient for the HTTP API of rust-bittorrent-client",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --progress --colors",
     "build": "webpack --progress --colors"
   },
   "author": {
-    "name": "Jeff Friesen",
-    "web": "https://github.com/jefffriesen"
+    "name": "Luke Olney",
+    "web": "https://github.com/lolney"
   },
   "license": "MIT",
   "devDependencies": {
@@ -40,6 +40,7 @@
     "jquery": "^3.3.1",
     "popper.js": "^1.14.3",
     "react-bootstrap": "^0.32.1",
+    "react-file-picker": "0.0.5",
     "react-redux": "^5.0.7",
     "react-redux-form": "^1.16.8",
     "react-table": "^6.8.0",

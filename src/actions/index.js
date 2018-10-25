@@ -1,5 +1,7 @@
 import fetch from 'cross-fetch';
 
+const BASE_URL = 'http://localhost:8000/';
+
 export const addTorrent = (torrent) => ({
     type: 'ADD_TORRENT',
     torrent
@@ -14,26 +16,74 @@ export const receiveTorrents = (torrents) => ({
     torrents
 });
 
-let requestUpdate = (action, id) =>
+export const openFileDialogAction = () => ({
+    type: 'OPEN_FILE_DIALOG'
+});
+
+export const closeFileDialogAction = () => ({
+    type: 'CLOSE_FILE_DIALOG'
+});
+
+export const closeFileDialog = (download_path, metainfo_path) =>
+    function(dispatch) {
+        dispatch(closeFileDialogAction());
+        dispatch(requestAddTorrent(download_path, metainfo_path));
+    };
+
+let requestUpdate = (action, config) =>
     function(dispatch) {
         dispatch(requestTorrents());
 
-        return fetch(`http://localhost:8000/torrent/${id}/${action}`)
+        return match_action(action, config)
             .then((response) => response.json())
             .then((torrent) => dispatch(addTorrent(torrent)))
             .catch((error) => console.log('An error occurred.', error));
     };
 
+let match_action = (action, config) => {
+    let url = (() => {
+        let params = config.params;
+        switch (action) {
+        case 'resume':
+            return `torrents/${params.id}/${action}`;
+        case 'pause':
+            return `torrents/${params.id}/${action}`;
+        case 'remove':
+            return `torrents/${params.id}`;
+        case 'add':
+            return (
+                'torrents?' +
+                    Object.entries(params)
+                        .map((kv) => kv.map(encodeURIComponent).join('='))
+                        .join('&')
+            );
+        default:
+            break;
+        }
+    })();
+    return fetch(BASE_URL + url, { method: config.method });
+};
+
 export function startTorrent(id) {
-    return requestUpdate('start', id);
+    return requestUpdate('resume', { params: { id: id }, method: 'POST' });
 }
 
 export function removeTorrent(id) {
-    return requestUpdate('remove', id);
+    return requestUpdate('remove', { params: { id: id }, method: 'DELETE' });
 }
 
 export function pauseTorrent(id) {
-    return requestUpdate('pause', id);
+    return requestUpdate('pause', { params: { id: id }, method: 'POST' });
+}
+
+export function requestAddTorrent(download_path, metainfo_path) {
+    return requestUpdate('add', {
+        params: {
+            download_path: download_path,
+            metainfo_path: metainfo_path
+        },
+        method: 'PUT'
+    });
 }
 
 export function fetchTorrents() {
@@ -53,7 +103,7 @@ export function fetchTorrents() {
         // In this case, we return a promise to wait for.
         // This is not required by thunk middleware, but it is convenient for us.
 
-        return fetch('http://localhost:8000/torrents')
+        return fetch(BASE_URL + '/torrents')
             .then(
                 (response) => response.json(),
                 // Do not use catch, because that will also catch

@@ -8,10 +8,25 @@ const reducers = function(state = {}, action) {
             torrents: torrents
         };
     case 'RECEIVE_TORRENTS':
-        console.log(action.torrents);
         return {
             ...state,
+            refreshing: false,
             torrents: action.torrents
+        };
+    case 'FETCH_TORRENTS':
+        return {
+            ...state,
+            refreshing: true
+        };
+    case 'OPEN_FILE_DIALOG':
+        return {
+            ...state,
+            fileDialogIsOpen: true
+        };
+    case 'CLOSE_FILE_DIALOG':
+        return {
+            ...state,
+            fileDialogIsOpen: false
         };
     default:
         return state;

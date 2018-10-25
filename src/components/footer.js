@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { removeTorrent, startTorrent, pauseTorrent } from '../actions';
+import {
+    removeTorrent,
+    startTorrent,
+    pauseTorrent,
+    openFileDialogAction
+} from '../actions';
 import { Button } from 'react-bootstrap';
 
 let Footer = ({ visible, onclick }) => (
@@ -8,7 +13,8 @@ let Footer = ({ visible, onclick }) => (
         {[
             { name: 'remove', action: removeTorrent },
             { name: 'start', action: startTorrent },
-            { name: 'pause', action: pauseTorrent }
+            { name: 'pause', action: pauseTorrent },
+            { name: 'add', action: openFileDialogAction }
         ].map((params) => (
             <Button
                 key={params.name}
@@ -26,8 +32,8 @@ Footer.propTypes = {
         remove: PropTypes.bool,
         start: PropTypes.bool,
         pause: PropTypes.bool
-    }),
-    onclick: PropTypes.func
+    }).isRequired,
+    onclick: PropTypes.func.isRequired
 };
 
 export default Footer;

@@ -5,15 +5,18 @@ function getVisibility(activeTorrent) {
     return {
         start: activeTorrent && activeTorrent.status == 'paused',
         pause: activeTorrent && activeTorrent.status != 'paused',
-        remove: activeTorrent
+        remove: activeTorrent != undefined,
+        add: true
     };
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        visible: getVisibility(state.torrents[0])
+    }; /*{
         visible: getVisibility(state.torrents[state.selectedTorrentId]),
         selected: state.selectedTorrentId
-    };
+    };*/
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
