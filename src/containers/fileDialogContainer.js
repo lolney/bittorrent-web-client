@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import FileDialog from '../components/fileDialog';
 
-import { closeFileDialog } from '../actions';
+import { closeFileDialog, closeFileDialogAction } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onSubmit: (dl, mi) => {
             dispatch(closeFileDialog(dl, mi));
+        },
+        onHide: () => {
+            dispatch(closeFileDialogAction());
         }
     };
 };

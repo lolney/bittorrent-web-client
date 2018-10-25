@@ -8,20 +8,24 @@ import {
 } from '../actions';
 import { Button } from 'react-bootstrap';
 
+import '../styles/footer.css';
+
 let Footer = ({ visible, onclick }) => (
-    <div>
+    <div className="footer">
         {[
             { name: 'remove', action: removeTorrent },
             { name: 'start', action: startTorrent },
             { name: 'pause', action: pauseTorrent },
-            { name: 'add', action: openFileDialogAction }
+            { name: 'add', label: 'add torrent', action: openFileDialogAction }
         ].map((params) => (
             <Button
+                bsSize="large"
+                className={'footer-button ' + params.name}
                 key={params.name}
                 disabled={!visible[params.name]}
                 onClick={() => onclick(params.action)}
             >
-                {params.name}
+                {params.label ? params.label : params.name}
             </Button>
         ))}
     </div>
@@ -29,9 +33,10 @@ let Footer = ({ visible, onclick }) => (
 
 Footer.propTypes = {
     visible: PropTypes.shape({
-        remove: PropTypes.bool,
-        start: PropTypes.bool,
-        pause: PropTypes.bool
+        start: PropTypes.bool.isRequired,
+        remove: PropTypes.bool.isRequired,
+        pause: PropTypes.bool.isRequired,
+        add: PropTypes.bool.isRequired
     }).isRequired,
     onclick: PropTypes.func.isRequired
 };

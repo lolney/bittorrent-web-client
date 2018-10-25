@@ -1,0 +1,18 @@
+.filepicker > div,
+.filepickerbutton {
+  display: inline;
+}
+
+.filepickerbutton {
+  min-width: 150px;
+}
+
+.filepickerlabel {
+  margin-left: 10px;
+}
+
+div > .modal-dialog {
+  width: 400px;
+  top: 50%;
+  transform: translateY(-75%) !important;
+}
