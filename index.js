@@ -9,15 +9,8 @@ import reducer from './src/reducers';
 const store = createStore(
     reducer,
     {
-        torrents: [
-            {
-                name: 'Example',
-                status: 'Running',
-                up: 120,
-                down: 60,
-                npeers: 30
-            }
-        ],
+        selected: null,
+        torrents: [],
         refreshing: false,
         fileDialogIsOpen: false
     },

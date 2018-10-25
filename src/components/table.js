@@ -11,7 +11,7 @@ const columns = ['Name', 'Status', 'Up', 'Down', 'Npeers'].map((header) => {
 });
 
 class Table extends Component {
-    ComponentDidMount() {
+    componentDidMount() {
         window.setInterval(() => this.props.refresh(), 1000);
     }
 

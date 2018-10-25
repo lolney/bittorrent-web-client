@@ -1,17 +1,19 @@
 const reducers = function(state = {}, action) {
     switch (action.type) {
     case 'ADD_TORRENT':
-        let torrents = { ...state.torrents };
+        var torrents = { ...state.torrents };
         torrents[action.torrent.info_hash] = action.torrent;
         return {
             ...state,
             torrents: torrents
         };
     case 'RECEIVE_TORRENTS':
+        torrents = action.torrents;
         return {
             ...state,
             refreshing: false,
-            torrents: action.torrents
+            torrents: torrents ? torrents : [],
+            selected: torrents && torrents.length > 0 ? torrents[0] : null
         };
     case 'FETCH_TORRENTS':
         return {

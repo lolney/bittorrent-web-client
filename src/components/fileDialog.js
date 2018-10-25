@@ -44,8 +44,8 @@ class FileDialog extends React.Component {
                         <Button
                             onClick={() =>
                                 this.props.onSubmit(
-                                    this.state.download_path,
-                                    this.state.metainfo_path
+                                    'test/test_write/server',
+                                    'test/torrent.torrent'
                                 )
                             }
                             disabled={

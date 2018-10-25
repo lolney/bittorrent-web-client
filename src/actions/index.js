@@ -34,10 +34,15 @@ let requestUpdate = (action, config) =>
     function(dispatch) {
         dispatch(requestTorrents());
 
-        return match_action(action, config)
-            .then((response) => response.json())
-            .then((torrent) => dispatch(addTorrent(torrent)))
-            .catch((error) => console.log('An error occurred.', error));
+        return (
+            match_action(action, config)
+                /*.then((response) => response.json())
+            .then((torrent) => dispatch(addTorrent(torrent)))*/
+                .then((_) => {
+                    dispatch(requestTorrents());
+                })
+                .catch((error) => console.log('An error occurred.', error))
+        );
     };
 
 let match_action = (action, config) => {
@@ -115,7 +120,10 @@ export function fetchTorrents() {
             .then((json) =>
                 // We can dispatch many times!
                 // Here, we update the app state with the results of the API call.
-                dispatch(receiveTorrents(json.torrents))
+                dispatch(receiveTorrents(json))
+            )
+            .catch((error) =>
+                console.error('Could not fetch torrents: ', error)
             );
     };
 }

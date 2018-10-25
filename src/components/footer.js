@@ -10,7 +10,7 @@ import { Button } from 'react-bootstrap';
 
 import '../styles/footer.css';
 
-let Footer = ({ visible, onclick }) => (
+let Footer = ({ visible, onclick, selectedId }) => (
     <div className="footer">
         {[
             { name: 'remove', action: removeTorrent },
@@ -23,7 +23,7 @@ let Footer = ({ visible, onclick }) => (
                 className={'footer-button ' + params.name}
                 key={params.name}
                 disabled={!visible[params.name]}
-                onClick={() => onclick(params.action)}
+                onClick={() => onclick(() => params.action(selectedId))}
             >
                 {params.label ? params.label : params.name}
             </Button>
@@ -32,6 +32,7 @@ let Footer = ({ visible, onclick }) => (
 );
 
 Footer.propTypes = {
+    selectedId: PropTypes.string.isRequired,
     visible: PropTypes.shape({
         start: PropTypes.bool.isRequired,
         remove: PropTypes.bool.isRequired,
