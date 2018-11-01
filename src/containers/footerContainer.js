@@ -12,18 +12,17 @@ function getVisibility(activeTorrent) {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        visible: getVisibility(state.selected),
-        selectedId: state.selected ? state.selected.info_hash : null
-    }; /*{
-        visible: getVisibility(state.torrents[state.selectedTorrentId]),
-        selected: state.selectedTorrentId
-    };*/
+        visible: getVisibility(
+            state.torrents.find((trnt) => trnt.info_hash == state.selectedId)
+        ),
+        selectedId: state.selectedId
+    };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onclick: (action) => {
-            dispatch(action());
+            if (action) dispatch(action());
         }
     };
 };

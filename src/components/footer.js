@@ -23,7 +23,12 @@ let Footer = ({ visible, onclick, selectedId }) => (
                 className={'footer-button ' + params.name}
                 key={params.name}
                 disabled={!visible[params.name]}
-                onClick={() => onclick(() => params.action(selectedId))}
+                onClick={() =>
+                    onclick(() => {
+                        if (selectedId || params.name == 'add')
+                            return params.action(selectedId);
+                    })
+                }
             >
                 {params.label ? params.label : params.name}
             </Button>
@@ -32,12 +37,12 @@ let Footer = ({ visible, onclick, selectedId }) => (
 );
 
 Footer.propTypes = {
-    selectedId: PropTypes.string.isRequired,
+    selectedId: PropTypes.string,
     visible: PropTypes.shape({
-        start: PropTypes.bool.isRequired,
-        remove: PropTypes.bool.isRequired,
-        pause: PropTypes.bool.isRequired,
-        add: PropTypes.bool.isRequired
+        start: PropTypes.bool,
+        remove: PropTypes.bool,
+        pause: PropTypes.bool,
+        add: PropTypes.bool
     }).isRequired,
     onclick: PropTypes.func.isRequired
 };

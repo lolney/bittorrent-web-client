@@ -16,6 +16,13 @@ export const receiveTorrents = (torrents) => ({
     torrents
 });
 
+export const selectTorrent = (info_hash) => {
+    return {
+        type: 'SELECT_TORRENT',
+        info_hash
+    };
+};
+
 export const openFileDialogAction = () => ({
     type: 'OPEN_FILE_DIALOG'
 });
@@ -23,6 +30,8 @@ export const openFileDialogAction = () => ({
 export const closeFileDialogAction = () => ({
     type: 'CLOSE_FILE_DIALOG'
 });
+
+/* ASYNC ACTIONS */
 
 export const closeFileDialog = (download_path, metainfo_path) =>
     function(dispatch) {
@@ -36,7 +45,8 @@ let requestUpdate = (action, config) =>
 
         return (
             match_action(action, config)
-                /*.then((response) => response.json())
+                /* // Enable this if API changes to put torrent in response:
+                .then((response) => response.json())
             .then((torrent) => dispatch(addTorrent(torrent)))*/
                 .then((_) => {
                     dispatch(requestTorrents());
@@ -92,14 +102,9 @@ export function requestAddTorrent(download_path, metainfo_path) {
 }
 
 export function fetchTorrents() {
-    // Thunk middleware knows how to handle functions.
-    // It passes the dispatch method as an argument to the function,
-    // thus making it able to dispatch actions itself.
-
+    // Use Thunk middleware to dispatch actions
     return function(dispatch) {
-        // First dispatch: the app state is updated to inform
-        // that the API call is starting.
-
+        // API call is starting
         dispatch(requestTorrents());
 
         // The function called by the thunk middleware can return a value,

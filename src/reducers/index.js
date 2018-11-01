@@ -12,8 +12,7 @@ const reducers = function(state = {}, action) {
         return {
             ...state,
             refreshing: false,
-            torrents: torrents ? torrents : [],
-            selected: torrents && torrents.length > 0 ? torrents[0] : null
+            torrents: torrents ? torrents : []
         };
     case 'FETCH_TORRENTS':
         return {
@@ -29,6 +28,11 @@ const reducers = function(state = {}, action) {
         return {
             ...state,
             fileDialogIsOpen: false
+        };
+    case 'SELECT_TORRENT':
+        return {
+            ...state,
+            selectedId: action.info_hash
         };
     default:
         return state;
